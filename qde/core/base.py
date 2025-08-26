@@ -15,7 +15,7 @@ class DatasetViews:
     train: Optional[Tuple[ArrayLike, ArrayLike]] = None
     test: Optional[Tuple[ArrayLike, ArrayLike]] = None
 
-    def _to_numpy(X, y) -> Tuple[np.ndarray, np.ndarray]:
+    def _to_numpy(self, X, y) -> Tuple[np.ndarray, np.ndarray]:
         if isinstance(X, (pd.DataFrame, pd.Series)):
             X = X.to_numpy()
         if isinstance(y, (pd.DataFrame, pd.Series)):
@@ -33,10 +33,10 @@ class DatasetViews:
         if view == "train":
             if self.train is None: raise ValueError("train view unavailable")
             return self.train
-        if view == "combined":
-            if self.combined is None: raise ValueError("combined view unavailable")
-            return self.combined
-        if view == "train+sample":
+        if view == "test":
+            if self.test is None: raise ValueError("combined view unavailable")
+            return self.test
+        if view == "train+synth":
             if self.train is None or self.sample is None:
                 raise ValueError("train+sample view requires both train and sample")
             Xtr, ytr = self.train; Xs, ys = self.sample

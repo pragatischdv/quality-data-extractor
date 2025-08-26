@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 from .core.base import FilterStrategy, SelectionResult, DatasetViews
 from .core.registry import StrategyRegistry
-from strategies.ces import CES
-from strategies.oes import OES
+from .strategies.ces import CES
+from .strategies.oes import OES
 from sklearn.base import BaseEstimator as BaseEstimator, ClassifierMixin
 from sklearn.naive_bayes import GaussianNB
 from qde.metrics.scorers import accuracy_for_view
@@ -75,6 +75,6 @@ class QDE:
 
         if compute_filtered_accuracy:
             view = DatasetViews(sample=(X_sel, y_sel), train=self.views.train, test=self.views.test)
-            result.meta["filtered-accuracy"] = accuracy_for_view(estimator, view, "train+synth")
+            result.meta["filtered-accuracy"] = accuracy_for_view(view, "train+synth", estimator=estimator)
 
         return result, X_sel, y_sel

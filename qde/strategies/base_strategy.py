@@ -24,9 +24,9 @@ class BaseFilteringStrategy(FilterStrategy, ABC):
         self.synth_X, self.synth_y = datasets.get("sample") 
         self.test_X, self.test_y = datasets.get("test")
 
-        self.train_y = LabelEncoder().fit(self.train_y) if encode_labels else self.train_y
-        self.synth_y = LabelEncoder().fit(self.synth_y) if encode_labels else self.synth_y
-        self.test_y = LabelEncoder().fit(self.test_y) if encode_labels else self.test_y
+        self.train_y = LabelEncoder().fit_transform(self.train_y) if encode_labels else self.train_y
+        self.synth_y = LabelEncoder().fit_transform(self.synth_y) if encode_labels else self.synth_y
+        self.test_y = LabelEncoder().fit_transform(self.test_y) if encode_labels else self.test_y
 
         self.n_classes = len(np.unique(self.train_y))
         self.n_features = self.train_X.shape[1]

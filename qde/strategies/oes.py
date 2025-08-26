@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 from typing import Any, Literal, List
 from ..core.base import SelectionResult
-from base_strategy import BaseFilteringStrategy
+from .base_strategy import BaseFilteringStrategy
 from sklearn.neighbors import NearestNeighbors
 from qde.metrics.scorers import accuracy_for_view, predictions_for_view
 
@@ -32,7 +32,7 @@ class OES(BaseFilteringStrategy):
         for i in range(self.test_size):
             if yhat_synth[i] == self.test_y[i]:
                 distances, nearest_indices = nbrs.kneighbors([self.test_X[i]])
-                indices.update(nearest_indices)
+                indices.update(nearest_indices.flatten().tolist())
 
         return SelectionResult(
             indices=np.asarray(list(indices)),

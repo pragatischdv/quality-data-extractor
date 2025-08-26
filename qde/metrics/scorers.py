@@ -5,7 +5,7 @@ from typing import Tuple
 from sklearn.base import BaseEstimator, ClassifierMixin, clone
 from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import GaussianNB
-from core.base import DatasetViews, View
+from ..core.base import DatasetViews, View
 
 def _fit_predict_for_view(
     views, view: str, *, estimator: BaseEstimator | ClassifierMixin
