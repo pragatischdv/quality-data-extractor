@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use QDE in your research, please cite the following paper:"
+message: "If you use QDE in your research, please cite the following paper."
 authors:
   - family-names: "Sachdeva"
     given-names: "Pragati"
@@ -12,18 +12,3 @@ journal: "IEEE Access"
 year: 2025
 doi: "10.1109/ACCESS.2025.3603435"
 type: article
-keywords:
-  - Synthetic data
-  - Data models
-  - Measurement
-  - Generative adversarial networks
-  - Accuracy
-  - Feature extraction
-  - Filtration
-  - Filtering
-  - Reviews
-  - Data privacy
-  - Data Augmentation
-  - Classification
-  - Prediction
-  - Structured Data
