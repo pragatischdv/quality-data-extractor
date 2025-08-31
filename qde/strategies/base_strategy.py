@@ -21,7 +21,7 @@ class BaseFilteringStrategy(FilterStrategy, ABC):
         **kw: Any,) -> "BaseFilteringStrategy":
         self.views = datasets
         self.train_X, self.train_y = datasets.get("train")
-        self.synth_X, self.synth_y = datasets.get("sample") 
+        self.synth_X, self.synth_y = datasets.get("synth") 
         self.test_X, self.test_y = datasets.get("test")
 
         self.train_y = LabelEncoder().fit_transform(self.train_y) if encode_labels else self.train_y

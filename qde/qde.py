@@ -9,7 +9,7 @@ from .strategies.ces import CES
 from .strategies.oes import OES
 from sklearn.base import BaseEstimator as BaseEstimator, ClassifierMixin
 from sklearn.naive_bayes import GaussianNB
-from qde.metrics.scorers import accuracy_for_view
+from qde.metrics.scorers import accuracy_between_views
 
 ArrayLike = np.ndarray | pd.DataFrame | pd.Series
 
@@ -64,7 +64,7 @@ class QDE:
         
         result = self.strategy.select(estimator=estimator, **kw)
 
-        X, y = self.views.get_raw("sample")
+        X, y = self.views.get_raw("synth")
 
         if isinstance(X, pd.DataFrame):
             X_sel = X.iloc[result.indices]
@@ -75,6 +75,7 @@ class QDE:
 
         if compute_filtered_accuracy:
             view = DatasetViews(sample=(X_sel, y_sel), train=self.views.train, test=self.views.test)
-            result.meta["filtered-accuracy"] = accuracy_for_view(view, "train+synth", estimator=estimator)
+            result.meta["filtered-accuracy"] = accuracy_between_views(*view.get("train+synth"), 
+                                                                      *view.get("test"), estimator=estimator)
 
         return result, X_sel, y_sel

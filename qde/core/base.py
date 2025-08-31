@@ -27,7 +27,7 @@ class DatasetViews:
         return X, y
 
     def get_raw(self, view: View) -> Tuple[ArrayLike, ArrayLike]:
-        if view == "sample":
+        if view == "synth":
             if self.sample is None: raise ValueError("sample view unavailable")
             return self.sample
         if view == "train":

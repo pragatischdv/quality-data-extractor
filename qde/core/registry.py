@@ -13,5 +13,8 @@ class StrategyRegistry:
     def get(self, name: str) -> FilterStrategy:
         key = name.lower()
         if key not in self._by_name:
-            raise KeyError(f"Unknown strategy '{name}'. Registered: {list(self._by_name)}")
+            raise KeyError(f"Unknown strategy '{name}'. Registered: {self.list()}")
         return self._by_name[key]
+    
+    def list(self) -> list:
+        return list(self._by_name)

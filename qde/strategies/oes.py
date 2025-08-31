@@ -5,7 +5,7 @@ from typing import Any, Literal, List
 from ..core.base import SelectionResult
 from .base_strategy import BaseFilteringStrategy
 from sklearn.neighbors import NearestNeighbors
-from qde.metrics.scorers import accuracy_for_view, predictions_for_view
+from qde.metrics.scorers import accuracy_between_views, predictions_between_view
 
 distance_modes = Literal["euclidean", "cosine"]
 
@@ -20,9 +20,12 @@ class OES(BaseFilteringStrategy):
         distance_mode: distance_modes = "euclidean",
         **kw: Any
     ) -> SelectionResult:
-        yhat_synth = predictions_for_view(self.views, "sample", estimator=estimator)
-        augmented_accuracy = accuracy_for_view(self.views, "train+synth", estimator=estimator)
-        original_accuracy = accuracy_for_view(self.views, "train", estimator=estimator)
+        yhat_synth = predictions_between_view(*self.views.get("synth"), 
+                                              *self.views.get("test"), estimator=estimator)
+        original_accuracy = accuracy_between_views(*self.views.get("train"), 
+                                                   *self.views.get("test"), estimator=estimator)
+        augmented_accuracy = accuracy_between_views(*self.views.get("train+synth"), 
+                                                    *self.views.get("test"), estimator=estimator)
 
         nbrs = NearestNeighbors(n_neighbors=k_neighbors, metric=distance_mode)
         nbrs.fit(self.synth_X, self.synth_y)
