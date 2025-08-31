@@ -24,8 +24,6 @@ class CES(BaseFilteringStrategy):
                                                     *self.views.get("test"), estimator=estimator)
         temp_train_X, temp_train_y = np.copy(self.train_X), np.copy(self.train_y)
 
-        print(f"Original shape: {temp_train_X.shape}, Original Accuracy: {original_accuracy}")
-
         indices = []
         for i in range(self.synth_size):
             try:

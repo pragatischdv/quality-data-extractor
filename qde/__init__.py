@@ -4,4 +4,4 @@ from .strategies.oes import OES
 
 __all__ = ["QDE", "CES", "OES"]
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
