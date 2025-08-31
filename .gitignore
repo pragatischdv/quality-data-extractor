@@ -1,0 +1,20 @@
+# ---- Python bytecode / caches
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.cache/
+.ipynb_checkpoints/
+
+# ---- Virtual envs
+.venv*/
+venv*/
+
+# ---- Build artifacts
+dist/
+build/
+*.egg-info/
+
+# ---- OS junk
+.DS_Store
+Thumbs.db
